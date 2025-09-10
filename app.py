@@ -88,9 +88,10 @@ def seed_data():
     conn.close()
 
 def try_ocr_image(path):
-    """Try extracting text using Tesseract. Returns a dict with best-effort fields."""
+    """Try extracting text using Tesseract. If not available, return empty fields."""
     result = {"raw_text": "", "name": "", "roll_no": "", "course": "", "cert_id": "", "marks": ""}
     try:
+        # Attempt OCR
         text = pytesseract.image_to_string(Image.open(path))
         result["raw_text"] = text
         lines = [l.strip() for l in text.splitlines() if l.strip()]
@@ -106,13 +107,13 @@ def try_ocr_image(path):
         m = re.search(r"(roll\s*no[:#]?\s*)([a-z0-9\-\/]+)", joined)
         if m: result["roll_no"] = m.group(2).upper()
 
-        # name – look for 'name: xxx' pattern
+        # name
         m = re.search(r"(name[:#]?\s*)([a-z.\s]+)", joined)
         if m:
             n = m.group(2).strip().title()
             result["name"] = " ".join([w for w in n.split() if len(w) > 1])[:60]
 
-        # course – rough keywords
+        # course
         for kw in ["b.tech cse", "btech cse", "b. tech cse", "b.tech eee", "diploma civil", "bsc", "msc", "mba"]:
             if kw in joined:
                 result["course"] = kw.upper()
@@ -123,7 +124,8 @@ def try_ocr_image(path):
         if m: result["marks"] = m.group(1).upper()
 
     except Exception as e:
-        result["raw_text"] = f"[OCR error] {e}"
+        # If OCR not available or fails, don’t crash the server
+        result["raw_text"] = f"[OCR unavailable: {e}]"
     return result
 
 def verify_logic(input_fields, ocr_fields):
