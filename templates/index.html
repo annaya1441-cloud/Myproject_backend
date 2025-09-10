@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row align-items-center">
+  <div class="col-lg-6">
+    <h1 class="display-5 fw-bold">Authenticity Validator for Academia</h1>
+    <p class="lead">Detect and verify academic certificates using OCR, database matching, and cryptographic hash checks.</p>
+    <ul>
+      <li>Upload certificate (image)</li>
+      <li>Auto-extract details (OCR)</li>
+      <li>Cross-verify with registered records</li>
+      <li>Flag mismatches / blacklist offenders</li>
+    </ul>
+    <a class="btn btn-primary btn-lg mt-2" href="/verify">Verify Certificate</a>
+  </div>
+  <div class="col-lg-6">
+    <div class="card p-4 shadow-sm">
+      <h5>Try a demo now</h5>
+      <p class="mb-2">Use this valid example:</p>
+      <ul class="mb-0">
+        <li><strong>Name</strong>: Anika Sharma</li>
+        <li><strong>Roll No</strong>: CSE19001</li>
+        <li><strong>Course</strong>: B.Tech CSE</li>
+        <li><strong>Cert ID</strong>: JH-2023-0001</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

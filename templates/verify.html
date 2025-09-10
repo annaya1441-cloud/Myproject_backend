@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-7">
+    <div class="card p-4 shadow-sm mb-3">
+      <h3 class="mb-3">Verify Certificate</h3>
+      <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label">Upload Certificate Image (PNG/JPG)</label>
+          <input class="form-control" type="file" name="file" accept="image/png, image/jpeg">
+          <div class="form-text">OCR will auto-extract details. You can also type them below.</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" type="text" name="name" placeholder="e.g., Anika Sharma">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Roll No</label>
+            <input class="form-control" type="text" name="roll_no" placeholder="e.g., CSE19001">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Course</label>
+            <input class="form-control" type="text" name="course" placeholder="e.g., B.Tech CSE">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Certificate ID</label>
+            <input class="form-control" type="text" name="cert_id" placeholder="e.g., JH-2023-0001">
+          </div>
+        </div>
+        <button class="btn btn-primary">Check Authenticity</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="card p-4 shadow-sm">
+      <h5>How it works</h5>
+      <ol class="mb-0">
+        <li>OCR extracts fields from the uploaded image</li>
+        <li>We compare details with registered records</li>
+        <li>Hash integrity simulates blockchain signing</li>
+        <li>Result shown instantly: Valid / Suspect / Invalid</li>
+      </ol>
+    </div>
+  </div>
+</div>
+{% endblock %}
